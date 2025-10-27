@@ -14,9 +14,10 @@
 </br>
 </br>
 
-<form>
+<form method='POST' action={% url "home" %}>
+  {% csrf_token %}
   <div class="mb-3">
-    <input type="text" class="form-control" placeholder='Ask ChatGPT A Question...'>
+    <input type="text" class="form-control" placeholder='Ask ChatGPT A Question...' name='question'>
   </div>
   <button type="submit" class="btn btn-primary">Send</button>
 </form>
