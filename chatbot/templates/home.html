@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if question %}
+  <div>
+    </br>
+    <h3>Question: {{ question }}</h3>
+    </br>
+  </div>
+{% endif %}
+
+
 <div class="card">
   <h5 class="card-header">ChatGPT Response</h5>
   <div class="card-body">
