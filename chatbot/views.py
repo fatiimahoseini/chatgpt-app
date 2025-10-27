@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+# Create HomePage
+def home(request):
+  return render(request, 'chatbot/home.html', {})
