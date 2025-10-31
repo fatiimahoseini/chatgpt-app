@@ -1,36 +1,51 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<h2 class="mb-4">Ask LinaAI</h2>
+
+<form id="questionForm" method="POST" action="{% url 'home' %}">
+    {% csrf_token %}
+    <input type="hidden" name="past_responses" value="{{ past_responses }}">
+    
+    <div class="mb-3">
+        <input type="text" id="questionInput" class="form-control" placeholder="Ask LinaAI a question..." name="question" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+
 {% if question %}
-  <div>
-    </br>
-    <h3>Question: {{ question }}</h3>
-    </br>
-  </div>
+    <div class="mt-4">
+        <h5>Question:</h5>
+        <p>{{ question }}</p>
+    </div>
 {% endif %}
 
+{% if past_responses %}
+    <div class="mt-4">
+        <h5>LinaAI Responses:</h5>
+        <div class="card">
+            <div class="card-body">
+                {{ past_responses|safe }}
+            </div>
+        </div>
+    </div>
+{% endif %}
 
-<div class="card">
-  <h5 class="card-header">LinaAI Response</h5>
-  <div class="card-body">
-    {% if response %}
-    {{ response }}
-    {% endif %}
-    </br>
-    </br>
-    </br>
-  </div>
-</div>
+<script>
+    const form = document.getElementById("questionForm");
+    const input = document.getElementById("questionInput");
 
-</br>
-</br>
-</br>
+    input.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            form.submit();
+            setTimeout(() => {
+                input.value = "";
+            }, 50);
+        }
+    });
+</script>
 
-<form method='POST' action={% url "home" %}>
-  {% csrf_token %}
-  <div class="mb-3">
-    <input type="text" class="form-control" placeholder='Ask LinaAI A Question...' name='question'>
-  </div>
-  <button type="submit" class="btn btn-primary">Send</button>
-</form>
-  {% endblock content %}
+{% endblock content %}
