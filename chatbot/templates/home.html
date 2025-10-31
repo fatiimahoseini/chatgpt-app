@@ -11,8 +11,11 @@
 
 
 <div class="card">
-  <h5 class="card-header">ChatGPT Response</h5>
+  <h5 class="card-header">LinaAI Response</h5>
   <div class="card-body">
+    {% if response %}
+    {{ response }}
+    {% endif %}
     </br>
     </br>
     </br>
@@ -26,7 +29,7 @@
 <form method='POST' action={% url "home" %}>
   {% csrf_token %}
   <div class="mb-3">
-    <input type="text" class="form-control" placeholder='Ask ChatGPT A Question...' name='question'>
+    <input type="text" class="form-control" placeholder='Ask LinaAI A Question...' name='question'>
   </div>
   <button type="submit" class="btn btn-primary">Send</button>
 </form>
