@@ -18,12 +18,12 @@ def home(request):
             r = requests.post(url, headers=headers, data=json.dumps(data))
             if r.status_code == 200:
                 res = r.json()
-                answer = res["candidates"][0]["content"]["parts"][0]["text"]
+                response = res["candidates"][0]["content"]["parts"][0]["text"]
             else:
-                answer = f"Error {r.status_code}: {r.text}"
+                response = f"Error {r.status_code}: {r.text}"
         except Exception as e:
-            answer = f"Exception: {e}"
+            response = f"Exception: {e}"
 
-        return render(request, 'home.html', {"question": question, "response": answer})
+        return render(request, 'home.html', {"question": question, "response": response})
 
     return render(request, 'home.html', {})
