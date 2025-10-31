@@ -8,7 +8,7 @@ def home(request):
         url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
         headers = {
             "Content-Type": "application/json",
-            "x-goog-api-key": "AIzaSyC8ayLaWVhKks922ajbT-8cRSJ0qkN48gM"
+            "x-goog-api-key": "YOUR_APIKEY_HERE"
         }
         data = {
             "contents": [{"parts": [{"text": question}]}]
