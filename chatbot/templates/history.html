@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br/>
+<h1>History</h1>
+<br/>
+{% if history %}
+
+{% for conversation in history %}
+<h4>{{ conversation.question }}</h4>
+<p>{{ conversation.answer }}</p>
+<a href="{% url 'delete_history' conversation.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+<br/>
+<br/>
+{% endfor %}
+
+{% endif %}
+
+{% endblock content %}

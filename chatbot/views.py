@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 import requests, json
 import os
+from .models import Past
 
 def home(request):
     if request.method == 'POST':
@@ -33,6 +35,10 @@ def home(request):
         else:
             past_responses = f"{past_responses}<br/><br/>{response}"
 
+        # Save to DB
+        record = Past(question=question, answer=response)
+        record.save()
+
         return render(request, 'home.html', {
             "question": question,
             "response": response,
@@ -40,3 +46,15 @@ def home(request):
         })
 
     return render(request, 'home.html', {"past_responses": ""})
+
+
+def history(request):
+    history = Past.objects.all()
+
+    return render(request, 'history.html', {"history": history})
+
+def delete_history(request, history_id):
+    history = Past.objects.get(pk=history_id)
+    history.delete()
+    messages.success(request, ("Deleted successfully!"))
+    return redirect('history')
