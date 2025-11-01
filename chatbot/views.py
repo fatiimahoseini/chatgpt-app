@@ -26,18 +26,19 @@ def home(request):
                 response = res["candidates"][0]["content"]["parts"][0]["text"]
             else:
                 response = f"Error {r.status_code}: {r.text}"
+
+            # Save to DB (inside try)
+            record = Past(question=question, answer=response)
+            record.save()
+
         except Exception as e:
             response = f"Exception: {e}"
 
-        # Logic for past responses (better)
+        # Handle past responses
         if not past_responses:
             past_responses = response
         else:
             past_responses = f"{past_responses}<br/><br/>{response}"
-
-        # Save to DB
-        record = Past(question=question, answer=response)
-        record.save()
 
         return render(request, 'home.html', {
             "question": question,
