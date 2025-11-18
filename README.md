@@ -204,18 +204,6 @@ python manage.py collectstatic
 - Change the port: `python manage.py runserver 8001`
 - Or stop the process using port 8000
 
-## License
-
-See the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Support
-
-For issues and questions, please open an issue on the repository.
-
 ---
 
 **Note**: This project uses Google's Gemini API, not OpenAI's ChatGPT, despite the project name. The application is branded as "LinaAI" in the user interface.
