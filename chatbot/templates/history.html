@@ -26,7 +26,14 @@
     {% endif %}
 
     {% for i in nums %}
-      <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+      <li class="page-item {% if page_obj.number == forloop.counter %}active{% endif %}">
+        <a class="page-link" 
+           href="?page={{ forloop.counter }}"
+           {% if page_obj.number == forloop.counter %}aria-current="page"{% endif %}
+        >
+          {{ forloop.counter }}
+        </a>
+      </li>
     {% endfor %}
 
     {% if page_obj.has_next %}
