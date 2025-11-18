@@ -3,6 +3,7 @@ from django.contrib import messages
 import requests, json
 import os
 from .models import Past
+from django.core.paginator import Paginator
 
 def home(request):
     if request.method == 'POST':
@@ -50,9 +51,18 @@ def home(request):
 
 
 def history(request):
+    # Set up pagination
+    p = Paginator(Past.objects.all(), 1)
+    page_number = request.GET.get('page')
+    page_obj = p.get_page(page_number)
+
+    # Queried the Database
     history = Past.objects.all()
 
-    return render(request, 'history.html', {"history": history})
+    # Get number of pages
+    nums = 'a' * page_obj.paginator.num_pages
+
+    return render(request, 'history.html', {"history": history, "page_obj": page_obj, "nums": nums})
 
 def delete_history(request, history_id):
     history = Past.objects.get(pk=history_id)
