@@ -1,4 +1,4 @@
-# LinaAI - Django Chatbot Application
+# Django Chatbot Application
 
 A modern Django web application that provides an interactive chatbot interface powered by Google's Gemini AI. Users can ask questions, receive AI-generated responses, and view their conversation history.
 
